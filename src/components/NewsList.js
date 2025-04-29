@@ -2,9 +2,9 @@ import React from 'react';
 
 function NewsList({ filteredEvents }) {
   return (
-    <main style={newsListStyle}>
+    <main>
       {filteredEvents.map((event) => (
-        <div key={event.id} style={eventStyle}>
+        <div key={event.id} className="event">
           <h2>{event.title}</h2>
           <p>{event.description}</p>
           <small>Type: {event.type}</small>
@@ -13,14 +13,5 @@ function NewsList({ filteredEvents }) {
     </main>
   );
 }
-
-const newsListStyle = {
-  padding: '20px',
-};
-
-const eventStyle = {
-  borderBottom: '1px solid #ccc',
-  padding: '10px 0',
-};
 
 export default NewsList;
