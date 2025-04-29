@@ -1,23 +1,26 @@
 import React from 'react';
 
-function NewsList({ news }) {
+function NewsList({ filteredEvents }) {
   return (
-    <div style={listStyle}>
-      {news.length > 0 ? (
-        news.map((item, index) => (
-          <div key={index} style={newsItemStyle}>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-          </div>
-        ))
-      ) : (
-        <p>No news available.</p>
-      )}
-    </div>
+    <main style={newsListStyle}>
+      {filteredEvents.map((event) => (
+        <div key={event.id} style={eventStyle}>
+          <h2>{event.title}</h2>
+          <p>{event.description}</p>
+          <small>Type: {event.type}</small>
+        </div>
+      ))}
+    </main>
   );
 }
 
-const listStyle = { padding: '1rem' };
-const newsItemStyle = { marginBottom: '1rem', borderBottom: '1px solid #ddd', paddingBottom: '0.5rem' };
+const newsListStyle = {
+  padding: '20px',
+};
+
+const eventStyle = {
+  borderBottom: '1px solid #ccc',
+  padding: '10px 0',
+};
 
 export default NewsList;
