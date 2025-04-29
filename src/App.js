@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import NewsList from './components/NewsList';
+import React from 'react';
+import events from './data';
 
 function App() {
-  const [news, setNews] = useState([
-    { title: 'Welcome to the University News Feed', description: 'Stay updated with university news and events!' },
-    { title: 'Event: Science Fair', description: 'Don’t miss the annual science fair this weekend!' },
-  ]);
-
-  return (
-    <div>
-      <Header />
-      <NewsList news={news} />
-    </div>
-  );
+    return (
+        <div>
+            <header style={{ backgroundColor: 'green', color: 'white', padding: '1rem' }}>
+                <h1>University News Feed</h1>
+            </header>
+            <main style={{ padding: '1rem' }}>
+                {events.map((event) => (
+                    <div key={event.id} style={{ borderBottom: '1px solid #ccc', padding: '1rem 0' }}>
+                        <h2>Event: {event.title}</h2>
+                        <p>{event.description}</p>
+                    </div>
+                ))}
+            </main>
+        </div>
+    );
 }
 
 export default App;
