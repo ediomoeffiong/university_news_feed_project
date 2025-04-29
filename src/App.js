@@ -1,57 +1,53 @@
-import React, { useState } from "react";
-import events from "./data";
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-    // State for the search query
-    const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState('All');
 
-    // Filter events based on the search query
-    const filteredEvents = events.filter(
-        (event) =>
-            event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            event.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  const events = [
+    { id: 1, title: 'Science Fair', description: 'Annual science fair this weekend!', type: 'Academic' },
+    { id: 2, title: 'Football Match', description: 'University finals next Saturday!', type: 'Sports' },
+    { id: 3, title: 'Cultural Night', description: 'Experience culture and diversity!', type: 'Social' },
+  ];
 
+  const filteredEvents = events.filter(event => {
     return (
-        <div>
-            {/* Header */}
-            <header style={{ backgroundColor: "green", color: "white", padding: "1rem" }}>
-                <h1>University News Feed</h1>
-            </header>
-
-            {/* Search Bar */}
-            <div style={{ padding: "1rem", textAlign: "center" }}>
-                <input
-                    type="text"
-                    placeholder="Search for events..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{
-                        padding: "0.5rem",
-                        width: "80%",
-                        maxWidth: "400px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                        fontSize: "1rem",
-                    }}
-                />
-            </div>
-
-            {/* Events */}
-            <main style={{ padding: "1rem" }}>
-                {filteredEvents.length > 0 ? (
-                    filteredEvents.map((event) => (
-                        <div key={event.id} style={{ borderBottom: "1px solid #ccc", padding: "1rem 0" }}>
-                            <h2>Event: {event.title}</h2>
-                            <p>{event.description}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p style={{ textAlign: "center" }}>No events found.</p>
-                )}
-            </main>
-        </div>
+      (filter === 'All' || event.type === filter) &&
+      event.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  });
+
+  return (
+    <div className="App">
+      <header>
+        <h1>University News Feed</h1>
+      </header>
+      <div className="controls">
+        <input
+          type="text"
+          placeholder="Search events..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+          <option value="All">All</option>
+          <option value="Academic">Academic</option>
+          <option value="Sports">Sports</option>
+          <option value="Social">Social</option>
+        </select>
+      </div>
+      <main>
+        {filteredEvents.map(event => (
+          <div key={event.id} className="event">
+            <h2>{event.title}</h2>
+            <p>{event.description}</p>
+            <small>Type: {event.type}</small>
+          </div>
+        ))}
+      </main>
+    </div>
+  );
 }
 
 export default App;
