@@ -59,7 +59,18 @@ const events = [
       description: "Support students presenting innovative business ideas.",
       category: "Business",
     },
+    {
+      id: 11,
+      title: "Startup Pitch Day",
+      description: "Support students presenting innovative business ideas.",
+      category: "Business",
+    },
+    {
+      id: 12,
+      title: "Startup Pitch Day",
+      description: "Support students presenting innovative business ideas.",
+      category: "Business",
+    },
   ];
   
   export default events;
-  
